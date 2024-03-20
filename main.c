@@ -32,7 +32,7 @@ void initalize(int* argc, char** argv) {
 
 void initializeGlew() {
   if(glewInit() != GLEW_OK) {
-    printf("Failed to initialize OpenGL");
+    printf("Failed to initialize OpenGL.\n");
   }
 }
 
@@ -51,7 +51,7 @@ void initializeWindow(int* argc, char** argv) {
   const int windowId = glutCreateWindow(windowTitle);
 
   if(windowId < 1) {
-    printf("Failed to create window using glut");
+    printf("Failed to create window using glut.\n");
   }
 
   glutReshapeFunc(onResizeWindow);
