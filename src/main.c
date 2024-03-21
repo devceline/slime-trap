@@ -3,19 +3,23 @@
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 
+// Init functions
 void initalize(int*, char*[]);
 void initializeWindow(int*, char*[]);
 void initializeGlew();
 void onResizeWindow(int, int);
+
+// Render function
 void render(void);
+
+// Geometry function
+void drawRectangle();
 
 const char* windowTitle = "Some title";
 short int windowWidth = 500;
 short int windowHeight = 500;
 short int windowX = 0;
 short int windowY = 0;
-
-
 
 int main(int argc, char **argv) {
   initalize(&argc, argv);
@@ -24,6 +28,25 @@ int main(int argc, char **argv) {
   
   return 0;
 }
+
+
+void drawRectangle() {
+  float vertices[] = {
+     0.0f,  0.5f,
+     0.5f, -0.5f,
+    -0.5f, -0.5f,
+  };    
+
+  GLuint vbo;
+  glGenBuffers(1, &vbo);
+
+  glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+  glBufferData(GL_ARRAY_BUFFER, sizeof(0.0f) * 6, vertices, GL_STATIC_DRAW); 
+}
+
+
+
 
 void initalize(int* argc, char** argv) {
   initializeWindow(argc, argv);

@@ -1,10 +1,24 @@
 CC = clang
 CFLAGS = -g -lGL -lglut -lGLEW
 
-main: main.c
-	${CC} ${CFLAGS} main.c -o target/main
+FILES = main.c
+SRC_FILES = $(foreach file,${FILES},src/${file})
+OBJECT_FILES = $(foreach file,${FILES},target/$(subst .c,.o,${file}))
 
-all: main
-  
+all: prep main
+
+${OBJECT_FILES} : prep ${SRC_FILES}
+	${CC} -c ${CFLAGS} $(subst target,src,$(subst .o,.c,$@)) -o $@
+
+main: ${OBJECT_FILES}
+	${CC} ${CFLAGS} ${OBJECT_FILES} -o target/main
+
+prep:
+	mkdir -p target
+
+run: all
+	./target/main
+
 clean: 
 	rm -rf target
+
